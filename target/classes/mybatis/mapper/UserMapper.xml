@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travischenn.commonweb.repository.UserMapper">
+  <resultMap id="BaseResultMap" type="com.travischenn.commonweb.domain.DO.rbac.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="is_enabled" jdbcType="INTEGER" property="isEnabled" />
+    <result column="is_account_expired" jdbcType="INTEGER" property="isAccountExpired" />
+    <result column="is_credentials_expired" jdbcType="INTEGER" property="isCredentialsExpired" />
+    <result column="is_account_locked" jdbcType="INTEGER" property="isAccountLocked" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, dept_id, name, gender, mobile, email, is_enabled, is_account_expired, 
+    is_credentials_expired, is_account_locked, remark, operator, operate_time, operate_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUsername"   parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM sys_user;
+  </select>
+  <select id="selectPagable" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM sys_user
+    LIMIT #{start}, #{size};
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+    SELECT
+    COUNT(*)
+    FROM sys_user;
+  </select>
+  <select id="selectByKeyWord" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM sys_user
+    WHERE ${field}=#{keyword}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.travischenn.commonweb.domain.DO.rbac.User">
+    insert into sys_user (id, username, password, 
+      dept_id, name, gender, 
+      mobile, email, is_enabled, 
+      is_account_expired, is_credentials_expired, 
+      is_account_locked, remark, operator, 
+      operate_time, operate_ip)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{deptId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{isEnabled,jdbcType=INTEGER}, 
+      #{isAccountExpired,jdbcType=INTEGER}, #{isCredentialsExpired,jdbcType=INTEGER}, 
+      #{isAccountLocked,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.travischenn.commonweb.domain.DO.rbac.User">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="isEnabled != null">
+        is_enabled,
+      </if>
+      <if test="isAccountExpired != null">
+        is_account_expired,
+      </if>
+      <if test="isCredentialsExpired != null">
+        is_credentials_expired,
+      </if>
+      <if test="isAccountLocked != null">
+        is_account_locked,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        #{isEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="isAccountExpired != null">
+        #{isAccountExpired,jdbcType=INTEGER},
+      </if>
+      <if test="isCredentialsExpired != null">
+        #{isCredentialsExpired,jdbcType=INTEGER},
+      </if>
+      <if test="isAccountLocked != null">
+        #{isAccountLocked,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.travischenn.commonweb.domain.DO.rbac.User">
+    update sys_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null">
+        is_enabled = #{isEnabled,jdbcType=INTEGER},
+      </if>
+      <if test="isAccountExpired != null">
+        is_account_expired = #{isAccountExpired,jdbcType=INTEGER},
+      </if>
+      <if test="isCredentialsExpired != null">
+        is_credentials_expired = #{isCredentialsExpired,jdbcType=INTEGER},
+      </if>
+      <if test="isAccountLocked != null">
+        is_account_locked = #{isAccountLocked,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.travischenn.commonweb.domain.DO.rbac.User">
+    update sys_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      is_enabled = #{isEnabled,jdbcType=INTEGER},
+      is_account_expired = #{isAccountExpired,jdbcType=INTEGER},
+      is_credentials_expired = #{isCredentialsExpired,jdbcType=INTEGER},
+      is_account_locked = #{isAccountLocked,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

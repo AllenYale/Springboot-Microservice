@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+                                        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="mysql" defaultModelType="flat">
+
+        <!-- 是否取消注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments"  value="true"/>
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/common?characterEncoding=utf-8&amp;useSSL=false"
+                        userId="root"
+                        password="123456"/>
+
+        <!-- 生成实体类 -->
+        <javaModelGenerator targetPackage="com.travischenn.commonweb.domain.DO.rbac" targetProject="src/main/java"/>
+
+        <!-- 生成maper.xml文件 -->
+        <sqlMapGenerator targetPackage="mybatis/mapper" targetProject="src/main/resources"/>
+
+        <!-- 生成dao接口 -->
+        <javaClientGenerator targetPackage="com.travischenn.commonweb.repository" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <!-- 配置表信息,不生成帮助类examples-->
+        <table schema="" tableName="sys_user" domainObjectName="User"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_role" domainObjectName="Role"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_acl" domainObjectName="AccessControl"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_dept" domainObjectName="Department"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_log" domainObjectName="Log"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_role_user" domainObjectName="RoleUserRelation"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_role_acl" domainObjectName="RoleAccessRelation"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+        <table schema="" tableName="sys_acl_module" domainObjectName="AccessModul"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false"/>
+
+    </context>
+
+</generatorConfiguration>
